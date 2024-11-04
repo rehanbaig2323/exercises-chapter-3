@@ -11,8 +11,9 @@ class Polynomial:
     def degree(self):
         """Determine the degree of polynomial."""
         return (len(self.coefficients) - 1)
-    
+
     def __str__(self): 
+        """Allow polynomial to be represented normally."""
         lizst = list(self.coefficients) 
         lizst.reverse() 
         tring = ""
@@ -36,5 +37,10 @@ class Polynomial:
                 elif i == 0: 
                     tring = tring + coef + "x^" + str(len(lizst) - i - 1)
                 else:
-                    tring = tring + " + " + coef + "x^" + str(len(lizst) - i - 1)
+                    tring = tring + " + " + coef + "x^" + \
+                        str(len(lizst) - i - 1)
         return tring
+
+    def __repr__(self):
+        """Allow for polynomial production."""
+        return type(self).__name__ + "(" + repr(self.coefficients) + ")"
