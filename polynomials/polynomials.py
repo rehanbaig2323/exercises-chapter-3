@@ -135,11 +135,8 @@ class Polynomial:
         if isinstance(other, Integral):
             copy = self
             for i in range(other - 1): 
-                copy = copy * copy
+                copy *= self
             return copy
         else:
             return NotImplemented
 
-
-a = Polynomial((1, 1))
-print(a ** 3)
