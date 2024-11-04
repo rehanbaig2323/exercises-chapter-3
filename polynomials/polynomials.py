@@ -58,14 +58,14 @@ class Polynomial:
             return Polynomial(tuple(lizst))
 
         elif isinstance(other, Polynomial):
-            todo = min(len(self.coefficients), len(other.coefficients)) 
+            todo = min(self.degree(), other.degree()) 
             if len(self.coefficients) >= len(other.coefficients): 
                 lizst1 = list(self.coefficients) 
                 lizst2 = list(other.coefficients) 
             else: 
                 lizst1 = list(other.coefficients)
                 lizst2 = list(self.coefficients) 
-            for i in range(todo): 
+            for i in range(todo + 1): 
                 lizst1[i] = lizst1[i] + lizst2[i] 
             return Polynomial(tuple(lizst1))
 
@@ -100,9 +100,35 @@ class Polynomial:
     def __rsub__(self, other):
         """Allow for reverse subtraction."""
         return self - other
+    
+    def __mul__(self, other): 
+        """Multiply polynomials together."""
+        if isinstance(other, Number):
+            lizst = list(self.coefficients)
+            lizst1 = [other * coef for coef in lizst]
+            return Polynomial(tuple(lizst1))
+        elif isinstance(other, Polynomial):
+            masterlist = []
+            for i in range(len(self.coefficients)):
+                prelist1 = self.coefficients[i] * other
+                prelist2 = list(prelist1.coefficients)
+                for k in range(i):
+                    prelist2.reverse()
+                    prelist2.append(0) 
+                    prelist2.reverse()
+                masterlist.append(Polynomial(tuple(prelist2)))
+            firstpoly = masterlist[0]
+            for i in range(1, len(masterlist)): 
+                firstpoly = firstpoly + masterlist[i]
+            return firstpoly
+        else:
+            return NotImplemented
+
+    def __rmul__(self, other):
+        """Allow for reverse multiplication."""
+        return self * other
 
 
-a = Polynomial((-1, -1, -1))
-b = Polynomial((2, 2, 2))
-print(b - a)
-
+a = Polynomial((5, 1))
+b = Polynomial((3, 1))
+print(a * b)
