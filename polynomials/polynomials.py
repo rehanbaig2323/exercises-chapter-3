@@ -72,7 +72,37 @@ class Polynomial:
         else:
             return NotImplemented
 
+    def __radd__(self, other):
+        """Allow for reverse addition."""
+        return self + other
 
-a = Polynomial((1, 2, 0, 1))
-b = Polynomial((0, 1))
-print(a + b)
+    def negafy(self): 
+        """Multiply a polynomial by -1."""
+        lizst = self.coefficients 
+        lizst1 = []
+        for coef in lizst: 
+            lizst1.append(-1 * coef)
+        return Polynomial(tuple(lizst1))
+
+    def __sub__(self, other): 
+        """Subtract polynomials from each other."""
+        if isinstance(other, Number):
+            lizst = list(self.coefficients)
+            lizst[0] = lizst[0] - other
+            return Polynomial(tuple(lizst))
+
+        elif isinstance(other, Polynomial):
+            return (self + other.negafy())
+
+        else:
+            return NotImplemented
+
+    def __rsub__(self, other):
+        """Allow for reverse subtraction."""
+        return self - other
+
+
+a = Polynomial((-1, -1, -1))
+b = Polynomial((2, 2, 2))
+print(b - a)
+
