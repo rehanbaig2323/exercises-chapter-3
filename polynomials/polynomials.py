@@ -14,15 +14,27 @@ class Polynomial:
     
     def __str__(self): 
         lizst = list(self.coefficients) 
+        lizst.reverse() 
         tring = ""
         for i in range(len(lizst)):
             coef = str(lizst[i])
             if lizst[i] != 0:
-                if i == 0:
-                    tring = tring + coef
-                elif i == 1:
+                if lizst[i] == 1: 
+                    if i == len(lizst) - 1:
+                        tring = tring + " + " + coef
+                    elif i == len(lizst) - 2:
+                        tring = tring + " + " + "x"
+                    elif i == 0: 
+                        tring = tring + "x^" + str(len(lizst) - i - 1)
+                    else:
+                        tring = tring + " + " + "x^" + str(len(lizst) - i - 1)
+                    continue
+                elif i == len(lizst) - 1:
+                    tring = tring + " + " + coef
+                elif i == len(lizst) - 2:
                     tring = tring + " + " + coef + "x"
+                elif i == 0: 
+                    tring = tring + coef + "x^" + str(len(lizst) - i - 1)
                 else:
-                    tring = tring + " + " + coef + "x^" + str(i)
+                    tring = tring + " + " + coef + "x^" + str(len(lizst) - i - 1)
         return tring
-            
