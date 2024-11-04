@@ -7,8 +7,4 @@ name = "polynomials"
 version = "0.1"
 
 [tool.hatch.build.targets.wheel]
-<<<<<<< HEAD
 packages = ["polynomials"]
-=======
-packages = ["polynomials"]
->>>>>>> 746446a9588eb92cb1fab64f633f36ed555fb781
