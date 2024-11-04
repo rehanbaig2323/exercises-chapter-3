@@ -1,4 +1,5 @@
 from numbers import Number # noqa f401
+from numbers import Integral # noqa f401
 
 
 class Polynomial:
@@ -129,6 +130,16 @@ class Polynomial:
         """Allow for reverse multiplication."""
         return self * other
 
+    def __pow__(self, other): 
+        """Allow for polyomial exponentiation."""
+        if isinstance(other, Integral):
+            copy = self
+            for i in range(other - 1): 
+                copy = copy * copy
+            return copy
+        else:
+            return NotImplemented
 
-a = Polynomial((2, 1))
-print(repr (3-a))
+
+a = Polynomial((1, 1))
+print(a ** 3)
