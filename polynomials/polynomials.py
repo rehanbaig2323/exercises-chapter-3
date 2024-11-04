@@ -58,11 +58,21 @@ class Polynomial:
             return Polynomial(tuple(lizst))
 
         elif isinstance(other, Polynomial):
-            pass
+            todo = min(len(self.coefficients), len(other.coefficients)) 
+            if len(self.coefficients) >= len(other.coefficients): 
+                lizst1 = list(self.coefficients) 
+                lizst2 = list(other.coefficients) 
+            else: 
+                lizst1 = list(other.coefficients)
+                lizst2 = list(self.coefficients) 
+            for i in range(todo): 
+                lizst1[i] = lizst1[i] + lizst2[i] 
+            return Polynomial(tuple(lizst1))
 
         else:
             return NotImplemented
 
 
 a = Polynomial((1, 2, 0, 1))
-print(a + 17)
+b = Polynomial((0, 1))
+print(a + b)
