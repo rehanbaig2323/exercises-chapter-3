@@ -99,7 +99,7 @@ class Polynomial:
 
     def __rsub__(self, other):
         """Allow for reverse subtraction."""
-        return self - other
+        return other - self
     
     def __mul__(self, other): 
         """Multiply polynomials together."""
@@ -129,6 +129,5 @@ class Polynomial:
         return self * other
 
 
-a = Polynomial((5, 1))
-b = Polynomial((3, 1))
-print(a * b)
+a = Polynomial((2, 1))
+print(repr (a-3))
