@@ -147,3 +147,14 @@ class Polynomial:
         for i in range(1, len(self.coefficients)):
             output += self.coefficients[i] * (other**i)
         return output
+    
+    def dx(self): 
+        """Differentiate a polynomial."""
+        lizst = []
+        for i in range(1, len(self.coefficients)): 
+            lizst.append(i * self.coefficients[i]) 
+        return Polynomial(tuple(lizst)) 
+
+def derivative(poly): 
+    return poly.dx()
+
