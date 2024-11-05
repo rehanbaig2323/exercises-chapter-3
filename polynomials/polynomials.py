@@ -140,3 +140,10 @@ class Polynomial:
         else:
             return NotImplemented
 
+    def __call__(self, other):
+        """Allow for substitution into the polynomial."""
+        constant = self.coefficients[0]
+        output = constant
+        for i in range(1, len(self.coefficients)):
+            output += self.coefficients[i] * (other**i)
+        return output
