@@ -1,5 +1,5 @@
-from numbers import Number # noqa f401
-from numbers import Integral # noqa f401
+from numbers import Number  # noqa f401
+from numbers import Integral  # noqa f401
 
 
 class Polynomial:
@@ -7,11 +7,18 @@ class Polynomial:
 
     def __init__(self, coefs):
         """Initialise method."""
-        self.coefficients = coefs
+        self.coefficients = self._normalize(coefs)
+
+    def _normalize(self, coefs):
+        """Remove trailing zeros to standardize the polynomial representation."""
+        coefs = list(coefs)
+        while len(coefs) > 1 and coefs[-1] == 0:
+            coefs.pop()
+        return tuple(coefs)
 
     def degree(self):
         """Determine the degree of polynomial."""
-        return (len(self.coefficients) - 1)
+        return len(self.coefficients) - 1
 
     def __str__(self): 
         """Allow polynomial to be represented normally."""
@@ -157,4 +164,8 @@ class Polynomial:
 
 def derivative(poly): 
     return poly.dx()
+
+a = Polynomial((0,)) 
+b = Polynomial(())
+print(a == b)
 
